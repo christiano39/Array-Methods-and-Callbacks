@@ -157,13 +157,39 @@ function getCountryWins(data, teamInitials) {
 
 /* STRETCH 3: Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals scored per appearance (average goals for) in the World Cup finals */
 
-function getGoals(data) {
+// function getGoals(data) {
 
-    /* code here */
+//     const finals = getFinals(data).map(match => {
+//       return {
+//         homeTeam: match["Home Team Name"],
+//         homeTeamGoals: match["Home Team Goals"],
+//         awayTeam: match["Away Team Name"],
+//         awayTeamGoals: match["Away Team Goals"],
+//       }
+//     });
 
-};
+//     const totalGoalsPerTeam = [];
+//     finals.forEach(game => {
+//       const homeName = game.homeTeam;
+//       const homeGoals = game.homeTeamGoals;
+//       const awayName = game.awayTeam;
+//       const awayGoals = game.awayTeamGoals;
+//       const obj = {
+//         [homeName]: homeGoals,
+//       }
+//       totalGoalsPerTeam.push(obj);
+//       const obj2 = {
+//         [awayName]: awayGoals,
+//       }
+//       totalGoalsPerTeam.push(obj2);
+//     });
+//     console.log(totalGoalsPerTeam);
 
-getGoals();
+
+
+// };
+
+// getGoals(fifaData);
 
 
 /* STRETCH 4: Write a function called badDefense() that accepts a parameter `data` and calculates the team with the most goals scored against them per appearance (average goals against) in the World Cup finals */
@@ -177,3 +203,27 @@ function badDefense(/* code here */) {
 badDefense();
 
 /* If you still have time, use the space below to work on any stretch goals of your chosing as listed in the README file. */
+
+// Create a function that takes country initials as a parameter and determines how many goals that country has scored in World Cup games since 1930.
+
+function totalGoals(data, countryInitials){
+
+const countryHomeGoals = data.filter(game => {
+  return game["Home Team Initials"] === countryInitials;
+});
+const countryAwayGoals = data.filter(game => {
+  return game["Away Team Initials"] === countryInitials;
+});
+
+const totalHomeGoals = countryHomeGoals.reduce((total, game) => {
+  return total + game["Home Team Goals"];
+}, 0);
+const totalAwayGoals = countryAwayGoals.reduce((total, game) => {
+  return total + game["Away Team Goals"];
+}, 0);
+
+return totalHomeGoals + totalAwayGoals;
+
+}
+
+//console.log(totalGoals(fifaData, "BRA"));
